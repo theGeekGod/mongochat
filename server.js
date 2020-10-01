@@ -67,3 +67,16 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function (err, db) {
         })
     });
 });
+
+app.get("/", (req, res) => {
+    if(trimmedCookie(req.headers.cookie)) {
+        res.redirect('/document');
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.get("/login", (req, res) => {
+    res.sendFile(__dirname + "/static/" + "login.html");
+});
